@@ -111,17 +111,26 @@ const styles = {
   },
   heroTitle: { color: '#fff', fontSize: '30px', fontWeight: '800', margin: '0 0 6px' },
   heroSub: { color: 'rgba(255,255,255,0.85)', fontSize: '16px', margin: 0 },
+
+  tabs: {
+    display: 'flex',
+    gap: '12px',
+    padding: '16px',
+    backgroundColor: '#fff',
+    borderBottom: '1px solid #eee',
+  },
+
   tabBtn: {
     flex: 1,
-    padding: '12px 6px',
+    padding: '14px 10px',
     borderRadius: '12px',
-  fontSize: '14px',
+    fontSize: '14px',
     fontWeight: '700',
     cursor: 'pointer',
     transition: 'all 0.2s',
+    letterSpacing: '0.5px',
   },
 
-  // 2-column grid like the reference image
   grid: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
@@ -138,11 +147,10 @@ const styles = {
     flexDirection: 'column',
   },
 
-  // Square image box using paddingTop trick — never stretches
   imageBox: {
     position: 'relative',
     width: '100%',
-    paddingTop: '100%', // makes it a perfect square
+    paddingTop: '100%',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -154,9 +162,9 @@ const styles = {
     top: '8px',
     right: '8px',
     color: '#fff',
-    fontSize: '9px',
+    fontSize: '11px',
     fontWeight: '700',
-    padding: '3px 8px',
+    padding: '4px 10px',
     borderRadius: '20px',
   },
 
@@ -191,25 +199,6 @@ const styles = {
     flex: 1,
   },
 
-  tabs: {
-    display: 'flex',
-    gap: '12px',
-    padding: '16px',
-    backgroundColor: '#fff',
-    borderBottom: '1px solid #eee',
-  },
-
-  tabBtn: {
-    flex: 1,
-    padding: '14px 10px',
-    borderRadius: '12px',
-    fontSize: '14px',
-    fontWeight: '700',
-    cursor: 'pointer',
-    transition: 'all 0.2s',
-    letterSpacing: '0.5px',
-  },
-
   cardFooter: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -233,17 +222,6 @@ const styles = {
     cursor: 'pointer',
     letterSpacing: '0.5px',
   },
-
-  badge: {
-    position: 'absolute',
-    top: '8px',
-    right: '8px',
-    color: '#fff',
-    fontSize: '11px',
-    fontWeight: '700',
-    padding: '4px 10px',
-    borderRadius: '20px',
-}, 
 
   loading: {
     textAlign: 'center',
