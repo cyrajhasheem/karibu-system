@@ -7,9 +7,9 @@ const ManageReviews = () => {
   const [loading, setLoading]   = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/reviews')
+    axios.get('https://karibu-system.onrender.com/api/reviews')
       .then(res => { setReviews(res.data); setLoading(false); });
-    axios.get('http://localhost:5000/api/reviews/summary')
+    axios.get('https://karibu-system.onrender.com/api/reviews/summary')
       .then(res => setSummary(res.data));
   }, []);
 

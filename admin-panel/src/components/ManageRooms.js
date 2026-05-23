@@ -15,7 +15,7 @@ const ManageRooms = () => {
   });
 
   const fetchRooms = () => {
-    axios.get('http://localhost:5000/api/rooms')
+    axios.get('https://karibu-system.onrender.com/api/rooms')
       .then(res => { setRooms(res.data); setLoading(false); })
       .catch(err => { console.error(err); setLoading(false); });
   };
@@ -25,7 +25,7 @@ const ManageRooms = () => {
   const handleAdd = async () => {
     if (!form.room_number || !form.price_per_night) return setError('Room number and price are required.');
     try {
-      await axios.post('http://localhost:5000/api/rooms', {
+      await axios.post('https://karibu-system.onrender.com/api/rooms', {
         room_number:     form.room_number,
         type:            form.type,
         price_per_night: parseFloat(form.price_per_night),
@@ -43,7 +43,7 @@ const ManageRooms = () => {
 
   const toggleAvailability = async (room) => {
     try {
-      await axios.put(`http://localhost:5000/api/rooms/${room._id}`, {
+      await axios.put(`https://karibu-system.onrender.com/api/rooms/${room._id}`, {
         is_available: !room.is_available
       });
       fetchRooms();
@@ -55,7 +55,7 @@ const ManageRooms = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this room?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/rooms/${id}`);
+      await axios.delete(`https://karibu-system.onrender.com/api/rooms/${id}`);
       fetchRooms();
     } catch (err) {
       console.error(err);

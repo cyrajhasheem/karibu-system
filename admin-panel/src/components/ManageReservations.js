@@ -6,7 +6,7 @@ const ManageReservations = () => {
   const [loading, setLoading]           = useState(true);
 
   const fetchReservations = () => {
-    axios.get('http://localhost:5000/api/reservations')
+    axios.get('https://karibu-system.onrender.com/api/reservations')
       .then(res => { setReservations(res.data); setLoading(false); })
       .catch(err => { console.error(err); setLoading(false); });
   };
@@ -15,7 +15,7 @@ const ManageReservations = () => {
 
   const updateStatus = async (id, status) => {
     try {
-      await axios.put(`http://localhost:5000/api/reservations/${id}`, { status });
+      await axios.put(`https://karibu-system.onrender.com/api/reservations/${id}`, { status });
       fetchReservations();
     } catch (err) {
       console.error(err);
@@ -25,7 +25,7 @@ const ManageReservations = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this reservation?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/reservations/${id}`);
+      await axios.delete(`https://karibu-system.onrender.com/api/reservations/${id}`);
       fetchReservations();
     } catch (err) {
       console.error(err);

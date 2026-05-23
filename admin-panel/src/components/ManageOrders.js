@@ -13,7 +13,7 @@ const ManageOrders = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchOrders = () => {
-    axios.get('http://localhost:5000/api/orders')
+    axios.get('https://karibu-system.onrender.com/api/orders')
       .then(res => { setOrders(res.data); setLoading(false); })
       .catch(err => { console.error(err); setLoading(false); });
   };
@@ -26,7 +26,7 @@ const ManageOrders = () => {
 
   const updateStatus = async (id, status) => {
     try {
-      await axios.put(`http://localhost:5000/api/orders/${id}/status`, { status });
+      await axios.put(`https://karibu-system.onrender.com/api/orders/${id}/status`, { status });
       fetchOrders();
     } catch (err) {
       console.error(err);

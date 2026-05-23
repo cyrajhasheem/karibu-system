@@ -15,7 +15,7 @@ const ManageMenu = () => {
   });
 
   const fetchItems = () => {
-    axios.get('http://localhost:5000/api/menu')
+    axios.get('https://karibu-system.onrender.com/api/menu')
       .then(res => { setItems(res.data); setLoading(false); })
       .catch(err => { console.error(err); setLoading(false); });
   };
@@ -25,7 +25,7 @@ const ManageMenu = () => {
   const handleAdd = async () => {
     if (!form.name || !form.price) return setError('Name and price are required.');
     try {
-      await axios.post('http://localhost:5000/api/menu', {
+      await axios.post('https://karibu-system.onrender.com/api/menu', {
         name:        form.name,
         category:    form.category,
         price:       parseFloat(form.price),
@@ -43,7 +43,7 @@ const ManageMenu = () => {
 
   const toggleAvailability = async (item) => {
     try {
-      await axios.put(`http://localhost:5000/api/menu/${item._id}`, {
+      await axios.put(`https://karibu-system.onrender.com/api/menu/${item._id}`, {
         is_available: !item.is_available
       });
       fetchItems();
@@ -55,7 +55,7 @@ const ManageMenu = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this item?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/menu/${id}`);
+      await axios.delete(`https://karibu-system.onrender.com/api/menu/${id}`);
       fetchItems();
     } catch (err) {
       console.error(err);
