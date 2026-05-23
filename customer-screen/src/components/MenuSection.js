@@ -13,7 +13,7 @@ const MenuSection = ({ onAddToOrder }) => {
   const [loading, setLoading]   = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/menu')
+    axios.get('https://karibu-system.onrender.com/api/menu')
       .then(res => { setItems(res.data); setLoading(false); })
       .catch(() => setLoading(false));
   }, []);

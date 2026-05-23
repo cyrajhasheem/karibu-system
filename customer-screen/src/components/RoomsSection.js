@@ -23,7 +23,7 @@ const RoomsSection = () => {
   const [success, setSuccess] = useState(false);
 
   const fetchRooms = () => {
-    axios.get('http://localhost:5000/api/rooms')
+    axios.get('https://karibu-system.onrender.com/api/rooms')
       .then(res => { setRooms(res.data); setLoading(false); })
       .catch(() => setLoading(false));
   };
