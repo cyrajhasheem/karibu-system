@@ -16,8 +16,6 @@ const ManageOrders = () => {
   const [loading, setLoading]       = useState(true);
   const [notification, setNotification] = useState(null);
   const socketRef = useRef(null);
-  const prevOrderIds = useRef(new Set());
-
   const fetchOrders = () => {
     axios.get(`${API}/api/orders`)
       .then(res => { setOrders(res.data); setLoading(false); })
