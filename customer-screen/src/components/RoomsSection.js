@@ -224,9 +224,9 @@ const styles = {
     top: '8px',
     left: '8px',
     color: '#fff',
-    fontSize: '9px',
+    fontSize: '11px',
     fontWeight: '700',
-    padding: '3px 8px',
+    padding: '4px 10px',
     borderRadius: '20px',
   },
 
@@ -235,9 +235,9 @@ const styles = {
     top: '8px',
     right: '8px',
     color: '#fff',
-    fontSize: '9px',
+    fontSize: '11px',
     fontWeight: '700',
-    padding: '3px 8px',
+    padding: '4px 10px',
     borderRadius: '20px',
   },
 
@@ -300,28 +300,6 @@ const styles = {
     fontWeight: '700',
     cursor: 'pointer',
     letterSpacing: '0.5px',
-  },
-
-  typeBadge: {
-    position: 'absolute',
-    top: '8px',
-    left: '8px',
-    color: '#fff',
-    fontSize: '11px',
-    fontWeight: '700',
-    padding: '4px 10px',
-    borderRadius: '20px',
-  },
-
-  availBadge: {
-    position: 'absolute',
-    top: '8px',
-    right: '8px',
-    color: '#fff',
-    fontSize: '11px',
-    fontWeight: '700',
-    padding: '4px 10px',
-    borderRadius: '20px',
   },
 
   formCard: {
