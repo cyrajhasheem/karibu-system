@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const API = 'https://karibu-system.onrender.com';
 const TABLE_ID = '000000000000000000000001';
 
 const OrderSection = ({ orderItems, setOrderItems, socket }) => {
@@ -8,11 +9,10 @@ const OrderSection = ({ orderItems, setOrderItems, socket }) => {
   const [timeLeft, setTimeLeft]       = useState(null);
   const [placing, setPlacing]         = useState(false);
 
-  // On load, check if there is an active order in the database
   useEffect(() => {
     const savedOrderId = localStorage.getItem('active_order_id');
     if (savedOrderId) {
-      axios.get(`http://localhost:5000/api/orders/${savedOrderId}`)
+      axios.get(`${API}/api/orders/${savedOrderId}`)
         .then(res => {
           const order = res.data;
           if (order && order.status !== 'delivered') {
@@ -25,7 +25,6 @@ const OrderSection = ({ orderItems, setOrderItems, socket }) => {
     }
   }, []);
 
-  // Listen for real-time order status updates
   useEffect(() => {
     if (!socket) return;
     socket.on('order_status_updated', (updatedOrder) => {
@@ -36,9 +35,13 @@ const OrderSection = ({ orderItems, setOrderItems, socket }) => {
     return () => socket.off('order_status_updated');
   }, [socket, placedOrder]);
 
-  // Countdown timer
+  // Countdown timer — stops when delivered
   useEffect(() => {
     if (!placedOrder || !placedOrder.estimated_ready) return;
+    if (placedOrder.status === 'delivered') {
+      setTimeLeft(null);
+      return;
+    }
     const interval = setInterval(() => {
       const diff = new Date(placedOrder.estimated_ready) - new Date();
       if (diff <= 0) {
@@ -65,7 +68,7 @@ const OrderSection = ({ orderItems, setOrderItems, socket }) => {
     setPlacing(true);
     try {
       const total = orderItems.reduce((sum, i) => sum + i.price * i.quantity, 0);
-      const res = await axios.post('http://localhost:5000/api/orders', {
+      const res = await axios.post(`${API}/api/orders`, {
         table_id: TABLE_ID,
         items: orderItems.map(i => ({
           menu_item_id: i._id,
@@ -74,7 +77,6 @@ const OrderSection = ({ orderItems, setOrderItems, socket }) => {
         })),
         total_amount: total,
       });
-      // Save order ID to localStorage so it survives a refresh
       localStorage.setItem('active_order_id', res.data._id);
       setPlacedOrder(res.data);
       setOrderItems([]);
@@ -96,7 +98,6 @@ const OrderSection = ({ orderItems, setOrderItems, socket }) => {
     <div style={styles.container}>
       <h2 style={styles.heading}>My Order</h2>
 
-      {/* Live Order Status */}
       {placedOrder && (
         <div style={styles.statusCard}>
           <h3 style={styles.statusTitle}>Order Placed! 🎉</h3>
@@ -115,21 +116,26 @@ const OrderSection = ({ orderItems, setOrderItems, socket }) => {
               {placedOrder.status.toUpperCase()}
             </span>
           </div>
-          {timeLeft && (
-            <div style={styles.timerBox}>
-              <span style={styles.timerLabel}>
-                {placedOrder.status === 'delivered' ? '✅ Delivered!' : '⏱️ Ready in:'}
+
+          {placedOrder.status === 'delivered' ? (
+            <div style={{ ...styles.timerBox, backgroundColor: '#eafaf1' }}>
+              <span style={{ ...styles.timerLabel, color: '#2ecc71', fontSize: '20px', fontWeight: '700' }}>
+                ✅ Your order has been delivered. Enjoy your meal!
               </span>
+            </div>
+          ) : timeLeft && (
+            <div style={styles.timerBox}>
+              <span style={styles.timerLabel}>⏱️ Ready in:</span>
               <span style={styles.timerValue}>{timeLeft}</span>
             </div>
           )}
+
           <button style={styles.newOrderBtn} onClick={handleNewOrder}>
             Place Another Order
           </button>
         </div>
       )}
 
-      {/* Cart */}
       {!placedOrder && (
         <>
           {orderItems.length === 0 ? (
